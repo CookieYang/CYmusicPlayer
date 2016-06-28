@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CYPlayButton.h"
 #import "CYSingleBase.h"
+#import <AudioToolbox/AudioFile.h>
 
 @interface CYVminiPlayer : UIView
 CYSingle_h(defaultPlayer)
@@ -18,5 +19,7 @@ CYSingle_h(defaultPlayer)
 @property (strong , nonatomic) UIButton *iconButton;
 @property (strong , nonatomic) CYPlayButton *playButton;
 @property (strong , nonatomic) UIButton *listButton;
-@property (assign , nonatomic) BOOL isInitial;
+
+- (void) stop;
+- (void) startWithMusicName: (NSString *) MusicName fileType: (AudioFileTypeID) fileType;
 @end

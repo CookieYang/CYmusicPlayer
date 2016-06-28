@@ -19,8 +19,11 @@
     return self;
 }
 
+
+
 - (void)setIsPause:(BOOL)isPause{
     self.enabled = YES;
+    _isPause = isPause;
     [self setBackgroundImage: [UIImage imageNamed: @"button_back_bg"] forState: UIControlStateNormal];
     
     //播放状态

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CYVminiPlayer.h"
 @interface CYCbaseViewController : UIViewController
-
+@property (strong , nonatomic) CYVminiPlayer *miniPlayer;
 @end

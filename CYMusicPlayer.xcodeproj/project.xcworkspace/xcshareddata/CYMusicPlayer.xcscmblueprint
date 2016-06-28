@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6A84FB9734629E6BF8F536009589B0B9F3F806FA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6A84FB9734629E6BF8F536009589B0B9F3F806FA" : 0,
+    "0222B64140589040791A765E97821405821F698A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1AB2CB63-E31D-4EA2-87FC-4B218157E202",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6A84FB9734629E6BF8F536009589B0B9F3F806FA" : "CYmusicPlayer\/",
+    "0222B64140589040791A765E97821405821F698A" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CYMusicPlayer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CYMusicPlayer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CookieYang\/CYcodes.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0222B64140589040791A765E97821405821F698A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CookieYang\/CYmusicPlayer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6A84FB9734629E6BF8F536009589B0B9F3F806FA"
+    }
+  ]
+}

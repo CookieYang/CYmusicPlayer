@@ -7,7 +7,6 @@
 //
 
 #import "CYCbaseViewController.h"
-#import "CYVminiPlayer.h"
 #import "Masonry.h"
 
 @interface CYCbaseViewController ()
@@ -19,9 +18,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     // 添加miniPlayer
-    CYVminiPlayer *miniPlayer = [[CYVminiPlayer alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, 50)];
-    [self.view addSubview: miniPlayer];
-    [miniPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.miniPlayer = [[CYVminiPlayer alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+    [self.view addSubview: self.miniPlayer];
+    [self.miniPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.mas_equalTo(@50);
     }];

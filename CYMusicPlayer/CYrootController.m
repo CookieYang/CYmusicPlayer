@@ -14,7 +14,7 @@
 #import "Masonry.h"
 #import "CYVminiPlayer.h"
 
-@interface CYrootController ()<CYheaderViewDelegate, UIScrollViewDelegate>
+@interface CYrootController () <CYheaderViewDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) CYheaderView *titleV;
 @property (strong , nonatomic) UIScrollView *scrollView;
 @property (copy , nonatomic) NSMutableArray<UIViewController*> *subControllers;

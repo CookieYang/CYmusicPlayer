@@ -9,14 +9,33 @@
 #import "CYVminiPlayer.h"
 #import "Masonry.h"
 #import "UIView+ViewAnimation.h"
+#import "NSTimer+BlockSupport.h"
+#import "CYMusicPlayer.h"
+
+@interface CYVminiPlayer ()
+@property (strong , nonatomic) CYMusicPlayer *player;
+@property (strong , nonatomic) NSTimer *timer;
+@end
 
 @implementation CYVminiPlayer
 CYSingle_m(defaultPlayer)
-- (void)setIsInitial:(BOOL)isInitial {
-    if (isInitial) {
-        self.userInteractionEnabled = YES;
+
+#pragma mark - 初始化
+- (void) startWithMusicName: (NSString *) MusicName fileType: (AudioFileTypeID) fileType {
+    self.userInteractionEnabled = YES;
+    self.listButton.enabled = YES;
+    self.playButton.isPause = NO;
+    self.iconButton.enabled  = YES;
+    self.authName.hidden = YES;
+    self.animationLabel.hidden = NO;
+    
+    if (self.player == nil) {
+        NSString *path = [[NSBundle mainBundle] pathForResource: MusicName ofType: nil];
+        self.player = [[CYMusicPlayer alloc] initWithFilePath:path fileType: fileType];
+        [self.player addObserver: self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     }
 }
+
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame: frame]) {
@@ -46,13 +65,14 @@ CYSingle_m(defaultPlayer)
         }];
  
         //增加播放按钮
-        self.playButton = [[CYPlayButton alloc] initWithFrame: CGRectMake(0, 0, 35, 35)];
+        self.playButton = [[CYPlayButton alloc] initWithFrame: CGRectMake(0, 0, 30, 30)];
         [self addSubview: self.playButton];
         [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.listButton.mas_left).offset(-8);
             make.centerY.equalTo(self);
-//            make.height.width.mas_equalTo(@40);
+            make.height.width.mas_equalTo(@28);
         }];
+        [self.playButton addTarget: self action: @selector(PlayButtonClicked) forControlEvents: UIControlEventTouchUpInside];
         
         // 增加专辑封面按钮
         self.iconButton = [UIButton new];
@@ -104,8 +124,67 @@ CYSingle_m(defaultPlayer)
             make.top.equalTo(self.musicName.mas_bottom).offset(5);
             make.left.equalTo(self.iconButton.mas_right).offset(5);
         }];
-//        self.authName.hidden = YES;
     }
     return self;
+}
+
+#pragma mark - 播放按钮点击事件
+- (void) PlayButtonClicked {
+    if (self.player.isPlayingOrWaiting) {
+        [self.player pause];
+    } else {
+        [self.player play];
+    }
+}
+
+- (void) stop {
+    [self.player stop];
+}
+
+#pragma mark - 状态控制
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if (object == self.player) {
+        if ([keyPath isEqualToString:@"status"])
+        {
+            [self performSelectorOnMainThread:@selector(handleStatusChanged) withObject:nil waitUntilDone:NO];
+        }
+    }
+}
+
+- (void) handleStatusChanged {
+    if (self.player.isPlayingOrWaiting) {
+        self.playButton.isPause = YES;
+        [self startTimer];
+    } else {
+        self.playButton.isPause = NO;
+        [self stopTimer];
+        [self progressMove];
+    }
+}
+
+
+- (void) startTimer {
+    if (!_timer) {
+        __weak typeof(self) weakSelf = self;
+        _timer = [NSTimer CY_scheduledTimerWithTimeInterval: 1 block:^{
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            [strongSelf progressMove];
+        } repeats: YES ];
+    }
+}
+
+- (void) stopTimer {
+    if (_timer) {
+        [_timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (void) progressMove {
+    if (self.player.duration != 0) {
+        [self.playButton setProgress: self.player.progress / self.player.duration];
+    } else {
+        [self.playButton setProgress: 0];
+    }
 }
 @end

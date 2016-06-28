@@ -7,9 +7,13 @@
 //
 
 #import "CYIdentificationController.h"
+#import "CYVminiPlayer.h"
 
 @implementation CYIdentificationController
 - (void) viewDidLoad {
     self.view.backgroundColor = [UIColor yellowColor];
+
 }
+
+
 @end
