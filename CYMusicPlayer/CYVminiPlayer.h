@@ -21,5 +21,5 @@ CYSingle_h(defaultPlayer)
 @property (strong , nonatomic) UIButton *listButton;
 
 - (void) stop;
-- (void) startWithMusicName: (NSString *) MusicName fileType: (AudioFileTypeID) fileType;
+- (void) startWithMusicName: (NSString *) MusicName fileType: (NSString *) fileType;
 @end

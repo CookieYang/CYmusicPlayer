@@ -39,13 +39,13 @@ static NSString *cellIdentifier = @"listCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [[CYVminiPlayer sharedSingledefaultPlayer] stop];
-    [ [CYVminiPlayer sharedSingledefaultPlayer] startWithMusicName: self.musicList[indexPath.row][@"MusicName"] fileType: [self.musicList[indexPath.row][@"MusicName"] intValue] ];
+    [ [CYVminiPlayer sharedSingledefaultPlayer] startWithMusicName: self.musicList[indexPath.row][@"MusicName"] fileType: self.musicList[indexPath.row][@"Type"] ];
 }
 
 #pragma mark - 数据相关
 - (NSArray *)musicList {
     if (_musicList == nil) {
-        _musicList = @[@{@"MusicName": @"01aijiujianrenxin.mp3", @"Type": @(kAudioFileMP3Type)},@{@"MusicName": @"05qingge.mp3", @"Type": @(kAudioFileMP3Type)},@{@"MusicName": @"M4ASample.m4a", @"Type": @(kAudioFileAAC_ADTSType)}];
+        _musicList = @[@{@"MusicName": @"01aijiujianrenxin.mp3", @"Type": @"1"},@{@"MusicName": @"05qingge.mp3", @"Type": @"1"},@{@"MusicName": @"M4ASample.m4a", @"Type": @"2"}];
     }
     return _musicList;
 }

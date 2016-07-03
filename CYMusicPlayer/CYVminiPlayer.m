@@ -21,19 +21,24 @@
 CYSingle_m(defaultPlayer)
 
 #pragma mark - 初始化
-- (void) startWithMusicName: (NSString *) MusicName fileType: (AudioFileTypeID) fileType {
+- (void) startWithMusicName: (NSString *) MusicName fileType: (NSString *) fileType {
     self.userInteractionEnabled = YES;
     self.listButton.enabled = YES;
-    self.playButton.isPause = NO;
     self.iconButton.enabled  = YES;
     self.authName.hidden = YES;
     self.animationLabel.hidden = NO;
     
-    if (self.player == nil) {
-        NSString *path = [[NSBundle mainBundle] pathForResource: MusicName ofType: nil];
-        self.player = [[CYMusicPlayer alloc] initWithFilePath:path fileType: fileType];
-        [self.player addObserver: self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    AudioFileTypeID type = 0;
+    if ([fileType isEqualToString: @"1"]) {
+        type = kAudioFileMP3Type	;
+    } else if ([fileType isEqualToString: @"2"]) {
+        type =  kAudioFileM4AType ;
     }
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource: MusicName ofType: nil];
+    self.player = [[CYMusicPlayer alloc] initWithFilePath:path fileType: type];
+    [self.player addObserver: self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    [self.player play];
 }
 
 
@@ -153,10 +158,10 @@ CYSingle_m(defaultPlayer)
 
 - (void) handleStatusChanged {
     if (self.player.isPlayingOrWaiting) {
-        self.playButton.isPause = YES;
+        self.playButton.isPause = NO;
         [self startTimer];
     } else {
-        self.playButton.isPause = NO;
+        self.playButton.isPause = YES;
         [self stopTimer];
         [self progressMove];
     }
@@ -167,7 +172,7 @@ CYSingle_m(defaultPlayer)
     if (!_timer) {
         __weak typeof(self) weakSelf = self;
         _timer = [NSTimer CY_scheduledTimerWithTimeInterval: 1 block:^{
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            __strong  typeof(weakSelf)strongSelf = weakSelf;
             [strongSelf progressMove];
         } repeats: YES ];
     }
@@ -181,6 +186,7 @@ CYSingle_m(defaultPlayer)
 }
 
 - (void) progressMove {
+    
     if (self.player.duration != 0) {
         [self.playButton setProgress: self.player.progress / self.player.duration];
     } else {

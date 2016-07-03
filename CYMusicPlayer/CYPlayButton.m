@@ -19,7 +19,10 @@
     return self;
 }
 
-
+- (void)setProgress:(CGFloat)progress {
+    _progress = progress;
+    [self setNeedsDisplay];
+}
 
 - (void)setIsPause:(BOOL)isPause{
     self.enabled = YES;

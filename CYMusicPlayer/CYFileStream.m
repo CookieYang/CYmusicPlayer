@@ -62,7 +62,7 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
     if (self = [super init]) {
         self.discontinuous = NO;
         _fileType = fileType;
-        fileSize = fileSize;
+        _fileSize = fileSize;
         [self openFileStreamWithFileTypeHint: _fileType error: error];
     }
     return  self;
@@ -104,7 +104,6 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
 
 #pragma mark - actions
 - (NSData *)fetchMagicCookie {
-    
     UInt32 cookieSize;
     Boolean writable;
     OSStatus status = AudioFileStreamGetPropertyInfo(_FileStreamID, kAudioFileStreamProperty_MagicCookieData, &cookieSize, &writable);
@@ -121,7 +120,6 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
     
     NSData *cookie = [NSData dataWithBytes: cookieData length: cookieSize];
     free(cookieData);
-    
     return cookie;
 }
 
@@ -138,7 +136,6 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
 - (SInt64)seekToTime:(NSTimeInterval *)time {
     
     SInt64 seekByteOffset;
-    
     SInt64 seekToPacket = floor(*time / _packetDuration);
     SInt64 outDataByteOffset;
     UInt32 ioFlags = 0;
@@ -167,6 +164,7 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
 - (void) calculatePacketDuration {
     if (_format.mSampleRate > 0) {
         _packetDuration = _format.mFramesPerPacket / _format.mSampleRate;
+      
     }
 }
 
@@ -227,7 +225,7 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
                 
                 for (int i = 0; i * sizeof(AudioFormatListItem) < formatListSize; i += sizeof(AudioFormatListItem)) {
                     AudioStreamBasicDescription format = formatList[i].mASBD;
-                    for (UInt32 j = 0; j < supportedFormatCount; j++) {
+                    for (UInt32 j = 0; j < supportedFormatCount; ++j) {
                         if (format.mFormatID == supportedFormats[j]) {
                             _format = format;
                             [self calculatePacketDuration];
@@ -274,11 +272,11 @@ static void CYFileStreamPacketsCallBack(void *inClientData,
     
     NSMutableArray *parsedDataArray = [NSMutableArray new];
     for (int i = 0; i < numberOfPackets; ++i) {
-        SInt64 packetOffset = packetDescriptions[i].mDataByteSize;
+        SInt64 packetOffset = packetDescriptions[i].mStartOffset;
         
         // 在此传递解析完的数据
         CYParasedData *parasedData = [CYParasedData parasedAudioDataWithBytes: packets + packetOffset packetDesciption: packetDescriptions[i]];
-        [parsedDataArray addObject: parasedData];
+            [parsedDataArray addObject: parasedData];
         
         if (_ProcessedPacketCount < BitRateEstimationMaxPackets) {
             _ProcessedPacketSizeTotal += parasedData.packetDesciption.mDataByteSize;

@@ -10,28 +10,28 @@
 
 @interface CYBuffer ()
 @property (copy , nonatomic) NSMutableArray *bufferBlockArray;
-@property (assign , nonatomic) UInt32 bufferSize;
+@property (assign , nonatomic) UInt32 bufferedSize;
 @end
 
 @implementation CYBuffer
 
 + (instancetype) buffer {
-    return [self new];
+    return [[self alloc] init];
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.bufferBlockArray = [NSMutableArray new];
+       _bufferBlockArray = [NSMutableArray new];
     }
     return self;
 }
 
 - (BOOL)hasData {
-    return self.bufferBlockArray.count > 0;
+    return _bufferBlockArray.count > 0;
 }
 
 - (UInt32)bufferedSize {
-    return self.bufferedSize;
+    return _bufferedSize;
 }
 
 - (void) enqueueFromDataArray:(NSArray *) dataArray {
@@ -42,20 +42,21 @@
 
 - (void)enqueueData:(CYParasedData *)data {
     if ([data isKindOfClass: [CYParasedData class]]) {
-        [self.bufferBlockArray addObject: data];
-        _bufferSize += data.data.length;
+        
+        [_bufferBlockArray addObject: data];
+        _bufferedSize += data.data.length;
     }
 }
 
 - (NSData *)dequeueDataWithSize:(UInt32)requiredSize packetCount:(UInt32 *)packetCount desciprtions:(AudioStreamPacketDescription **)descriptions {
-    if (requiredSize == 0 && self.bufferBlockArray.count == 0) {
+    if (requiredSize == 0 && _bufferBlockArray.count == 0) {
         return nil;
     }
     
     SInt64 size = requiredSize;
     int i = 0;
-    for (; i < self.bufferBlockArray.count; i++) {
-        CYParasedData *block = self.bufferBlockArray[i];
+    for (i = 0; i < _bufferBlockArray.count; i++) {
+        CYParasedData *block = _bufferBlockArray[i];
         SInt64 length = block.data.length;
         if (size > length) {
             size -= length;
@@ -70,7 +71,7 @@
         return nil;
     }
     
-    UInt32 count = (i >= self.bufferBlockArray.count) ? (UInt32)self.bufferBlockArray.count : (i + 1);
+    UInt32 count = (i >= _bufferBlockArray.count) ? (UInt32)_bufferBlockArray.count : (i + 1);
     *packetCount = count;
     if (count == 0) {
         return nil;
@@ -82,7 +83,7 @@
     
     NSMutableData *retData = [NSMutableData new];
     for (int j = 0; j < count; ++j) {
-        CYParasedData *block = self.bufferBlockArray[j];
+        CYParasedData *block = _bufferBlockArray[j];
         if (descriptions != NULL) {
             AudioStreamPacketDescription desc = block.packetDesciption;
             desc.mStartOffset = [retData length];
@@ -91,19 +92,18 @@
         [retData appendData: block.data];
     }
     NSRange removeRange = NSMakeRange(0, count);
-    [self.bufferBlockArray removeObjectsInRange: removeRange];
+    [_bufferBlockArray removeObjectsInRange: removeRange];
     
-    _bufferSize -= retData.length;
-    
+    _bufferedSize -= retData.length;
     return retData;
 }
 
 - (void)clean {
-    _bufferSize = 0;
-    [self.bufferBlockArray removeAllObjects];
+    _bufferedSize = 0;
+    [_bufferBlockArray removeAllObjects];
 }
 
 -(void)dealloc {
-    [self.bufferBlockArray removeAllObjects];
+    [_bufferBlockArray removeAllObjects];
 }
 @end

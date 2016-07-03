@@ -33,6 +33,7 @@
 		9D8D3C2D1D0974A100C548FB /* CYCbaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D3C2C1D0974A100C548FB /* CYCbaseViewController.m */; };
 		9D8D3C301D09B63A00C548FB /* NSTimer+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D3C2F1D09B63A00C548FB /* NSTimer+BlockSupport.m */; };
 		9DA8D95C1D1E7667000642A4 /* CYfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8D95B1D1E7667000642A4 /* CYfile.m */; };
+		9DA8D9C11D220CEC000642A4 /* CYoutputQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DA8D9C01D220CEC000642A4 /* CYoutputQueue.m */; };
 		9DED0E5A1D1E1361004207F3 /* 01aijiujianrenxin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DED0E581D1E1361004207F3 /* 01aijiujianrenxin.mp3 */; };
 		9DED0E5B1D1E1361004207F3 /* 05qingge.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9DED0E591D1E1361004207F3 /* 05qingge.mp3 */; };
 		9DFA8F1E1D008A8900BA8ABC /* CYrootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DFA8F1D1D008A8900BA8ABC /* CYrootController.m */; };
@@ -101,6 +102,8 @@
 		9D8D3C2F1D09B63A00C548FB /* NSTimer+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BlockSupport.m"; sourceTree = "<group>"; };
 		9DA8D95A1D1E7667000642A4 /* CYfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYfile.h; sourceTree = "<group>"; };
 		9DA8D95B1D1E7667000642A4 /* CYfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYfile.m; sourceTree = "<group>"; };
+		9DA8D9BF1D220CEC000642A4 /* CYoutputQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYoutputQueue.h; sourceTree = "<group>"; };
+		9DA8D9C01D220CEC000642A4 /* CYoutputQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYoutputQueue.m; sourceTree = "<group>"; };
 		9DED0E581D1E1361004207F3 /* 01aijiujianrenxin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 01aijiujianrenxin.mp3; sourceTree = "<group>"; };
 		9DED0E591D1E1361004207F3 /* 05qingge.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 05qingge.mp3; sourceTree = "<group>"; };
 		9DFA8F1C1D008A8900BA8ABC /* CYrootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYrootController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				9D4CE8FC1D1A797F003495F0 /* CYFileStream.m */,
 				9DA8D95A1D1E7667000642A4 /* CYfile.h */,
 				9DA8D95B1D1E7667000642A4 /* CYfile.m */,
+				9DA8D9BF1D220CEC000642A4 /* CYoutputQueue.h */,
+				9DA8D9C01D220CEC000642A4 /* CYoutputQueue.m */,
 				9D4CE8F41D18C60E003495F0 /* CYBuffer.h */,
 				9D4CE8F51D18C60E003495F0 /* CYBuffer.m */,
 			);
@@ -403,6 +408,7 @@
 				9D315F6D1D0072B300006723 /* NSArray+MASAdditions.m in Sources */,
 				9D315F6A1D0072B300006723 /* MASLayoutConstraint.m in Sources */,
 				9D315F751D007AB600006723 /* CYheaderView.m in Sources */,
+				9DA8D9C11D220CEC000642A4 /* CYoutputQueue.m in Sources */,
 				9DFA8F1E1D008A8900BA8ABC /* CYrootController.m in Sources */,
 				9D315D241D00694D00006723 /* main.m in Sources */,
 				9DFA8F241D01ABCC00BA8ABC /* CYbuttomToolView.m in Sources */,
