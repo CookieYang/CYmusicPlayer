@@ -91,7 +91,7 @@ CYSingle_m(defaultPlayer)
             make.centerY.equalTo(self);
             make.height.width.mas_equalTo(@40);
         }];
-        
+                
         // 添加歌曲名标签
         self.musicName = [UILabel new];
         self.musicName.text = @"Start to enjoy music";

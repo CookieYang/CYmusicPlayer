@@ -80,7 +80,7 @@
 		9D315F731D007AB600006723 /* CYheaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYheaderView.h; sourceTree = "<group>"; };
 		9D315F741D007AB600006723 /* CYheaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYheaderView.m; sourceTree = "<group>"; };
 		9D4CE8E01D1811CC003495F0 /* CYMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYMusicPlayer.h; sourceTree = "<group>"; };
-		9D4CE8E11D1811CC003495F0 /* CYMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYMusicPlayer.m; sourceTree = "<group>"; };
+		9D4CE8E11D1811CC003495F0 /* CYMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = sourcecode.c.objc; path = CYMusicPlayer.m; sourceTree = "<group>"; };
 		9D4CE8E41D181DCF003495F0 /* CYListModle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYListModle.h; sourceTree = "<group>"; };
 		9D4CE8E51D181DCF003495F0 /* CYListModle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYListModle.m; sourceTree = "<group>"; };
 		9D4CE8E71D182333003495F0 /* M4ASample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = M4ASample.m4a; sourceTree = "<group>"; };

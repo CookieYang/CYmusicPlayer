@@ -22,7 +22,7 @@ const int CYQueueBufferCount= 2;
 @property (copy , nonatomic) NSMutableArray *buffers;
 @property (copy , nonatomic) NSMutableArray *reusableBuffers;
 
-@property (assign , nonatomic) BOOL isRunnig;
+@property (assign , nonatomic) BOOL isRunning;
 @property (assign , nonatomic) BOOL started;
 @property (assign , nonatomic) NSTimeInterval playedTime;
 
@@ -278,7 +278,7 @@ static void CYaudioQueueOutputCallback(void *inUserData, AudioQueueRef inAQ, Aud
         UInt32 isRunning = 0;
         UInt32 size = sizeof(isRunning);
         AudioQueueGetProperty(audioQueue, property, &isRunning, &size);
-        _isRunnig = isRunning;
+        _isRunning = isRunning;
     }
 }
 
